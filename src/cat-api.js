@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Notiflix from 'notiflix';
 const apiKey =
   'live_n1sdJMxkaVhtsdFqp4t39Y2DcAMa77V9diAbkhM1vhRFAuJZYL01uyeRM1Hiae7s';
 axios.defaults.headers.common['x-api-key'] = apiKey;
@@ -21,13 +22,13 @@ export function fetchBreeds() {
     })
     .catch(error => {
       console.log(error);
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!'
+      );
     });
 }
 export function fetchCatByBreed(breedId) {
-  const searchParams = new URLSearchParams({
-    breeds_Ids: `${breedId}`,
-  });
-  const apiUrl = `https://api.thecatapi.com/v1/images/search?${searchParams}`;
+  const apiUrl = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
   return axios
     .get(apiUrl)
     .then(response => {
@@ -36,5 +37,8 @@ export function fetchCatByBreed(breedId) {
     })
     .catch(error => {
       console.log(error);
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!'
+      );
     });
 }
