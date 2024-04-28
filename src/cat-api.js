@@ -5,6 +5,7 @@ axios.defaults.headers.common['x-api-key'] = apiKey;
 const selectInput = document.querySelector('select.breed-select');
 
 export function fetchBreeds() {
+  selectInput.setAttribute('hidden', '');
   const apiUrl = 'https://api.thecatapi.com/v1/breeds';
   return axios
     .get(apiUrl)

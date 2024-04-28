@@ -3,10 +3,15 @@ import { fetchBreeds } from './cat-api';
 import { fetchCatByBreed } from './cat-api';
 const selectInput = document.querySelector('select.breed-select');
 const catInfoArea = document.querySelector('div.cat-info');
+const loader = document.querySelector('p.loader');
 
-selectInput.addEventListener('click', fetchBreeds);
+selectInput.addEventListener('click', () => {
+  fetchBreeds();
+  selectInput.removeAttribute('hidden');
+});
 selectInput.addEventListener('change', event => {
   const breedId = event.currentTarget.value;
+  catInfoArea.setAttribute('hidden', '');
   fetchCatByBreed(breedId)
     .then(catInfo => {
       catInfoArea.innerHTML = `
@@ -19,4 +24,6 @@ selectInput.addEventListener('change', event => {
     .catch(error => {
       console.error(error);
     });
+  loader.style.display = 'none';
+  catInfoArea.removeAttribute('hidden');
 });
