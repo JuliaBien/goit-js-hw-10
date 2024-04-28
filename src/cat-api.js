@@ -24,10 +24,10 @@ export function fetchBreeds() {
     });
 }
 export function fetchCatByBreed(breedId) {
-  const apiUrl = `https://api.thecatapi.com/v1/images/search?${searchParams}`;
   const searchParams = new URLSearchParams({
     breeds_Ids: `${breedId}`,
   });
+  const apiUrl = `https://api.thecatapi.com/v1/images/search?${searchParams}`;
   return axios
     .get(apiUrl)
     .then(response => {
