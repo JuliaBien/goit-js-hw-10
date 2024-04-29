@@ -9,9 +9,13 @@ const loader = document.querySelector('p.loader');
 const error = document.querySelector('p.error');
 error.style.display = 'none';
 loader.style.display = 'none';
-new SlimSelect({
-  select: selectInput,
-});
+
+const settingSlimSelect = {
+  placeholderText: 'Choose your cat',
+  openPosition: 'up',
+};
+const slim = new SlimSelect(selectInput, settingSlimSelect);
+
 selectInput.addEventListener('click', () => {
   fetchBreeds();
   selectInput.removeAttribute('hidden');
