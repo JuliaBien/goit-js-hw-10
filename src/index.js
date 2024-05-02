@@ -15,11 +15,15 @@ const settingSlimSelect = {
   openPosition: 'up',
 };
 const slim = new SlimSelect(selectInput, settingSlimSelect);
-
-selectInput.addEventListener('click', () => {
+window.addEventListener('DOMContentLoaded', () => {
   fetchBreeds();
   selectInput.removeAttribute('hidden');
 });
+
+// selectInput.addEventListener('click', () => {
+//   fetchBreeds();
+//   selectInput.removeAttribute('hidden');
+// });
 selectInput.addEventListener('change', event => {
   const breedId = event.currentTarget.value;
   catInfoArea.setAttribute('hidden', '');
@@ -29,12 +33,14 @@ selectInput.addEventListener('change', event => {
     <img src="${catInfo.url}" alt="Cat Image"/>
     <h2>${catInfo.breeds[0].name}</h2>
     <p>${catInfo.breeds[0].description}</p>
-    <p>Temperament: ${catInfo.breeds[0].temperament}</p>
+    <p>Temperament: ${catInfo.breeds[0].temperament}</p>S
     `;
     })
     .catch(error => {
       console.error(error);
+    })
+    .finally(() => {
+      loader.style.display = 'none';
+      catInfoArea.removeAttribute('hidden');
     });
-  loader.style.display = 'none';
-  catInfoArea.removeAttribute('hidden');
 });
